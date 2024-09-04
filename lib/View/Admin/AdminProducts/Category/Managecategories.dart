@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:store_app/Constant/colorpage.dart';
 import 'package:store_app/View/Admin/AdminProducts/Category/Clothes/clotheseditpage.dart';
+import 'package:store_app/View/Admin/AdminProducts/Category/Shoes/shoeseditpage.dart';
 // import 'package:store_app/View/Admin/Firebasefirestore/electronicsstore.dart';
 // import 'package:store_app/View/Admin/Firebasefirestore/glocerystore.dart';
-import 'package:store_app/View/Admin/Firebasefirestore/shoesstore.dart';
 
 class CategoryMangScreen extends StatelessWidget {
   @override
@@ -18,7 +18,7 @@ class CategoryMangScreen extends StatelessWidget {
         crossAxisCount: 2,
         children: [
           buildCategoryItem(context, 'Clothes', 'assets/clothes.jpeg', ClothesProScreen()),
-          buildCategoryItem(context, 'Shoes', 'assets/shoes.jpeg', FirestorePostShoesscreen()),
+          buildCategoryItem(context, 'Shoes', 'assets/shoes.jpeg', ShoesProScreen()),
           // buildCategoryItem(context, 'Grocery', 'assets/foods.jpeg', FirestoreGloceryPostscreen()),
           // buildCategoryItem(context, 'Electronics', 'assets/electronics.jpeg', FirestoreElectronicsPostscreen()),
         ],

@@ -15,10 +15,10 @@ class _AnimatedScreenState extends State<AnimatedScreen>
   late AnimationController _controller;
   late Animation<double> _animation;
   final List<String> _images = [
-    'assets/banner.jpeg',
-    'assets/bannertwo.jpeg',
-    'assets/bannerthree.jpeg',
-    'assets/bannerfr.jpeg',
+    'assets/banner.png',
+    'assets/bannertwo.png',
+    'assets/bannerthree.png',
+    'assets/bannerfr.png',
   ];
 
   @override
@@ -67,7 +67,7 @@ class _AnimatedScreenState extends State<AnimatedScreen>
                 return Transform.translate(
                   offset: Offset(_animation.value * MediaQuery.of(context).size.width, 0),
                   child: Text(
-                    'Welcome to the MFADII store',
+                    'Welcome! MFADII APP SHOP NOW',
                     style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                   ),
                 );

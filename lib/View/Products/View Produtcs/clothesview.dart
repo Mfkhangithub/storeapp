@@ -133,18 +133,14 @@ class _ClothesProductViewState extends State<ClothesProductView> {
                   var data = doc.data() as Map<String, dynamic>;
                   String? imageUrl = data.containsKey('imageUrl') ? data['imageUrl'] : null;
       
-         return Container(
-           width: 200, // Adjust the width of each item
-           margin: EdgeInsets.only(right: 8.0),
-           child: GridItemWidget(
-             item: GridItem(
-               imageUrl: imageUrl.toString(),
-               title: data['title'].toString(),
-               itemName: data['description'].toString(),
-               price: data['price'].toString(),
-               discountedPrice: data['disprice'].toString(),
-               category: '',
-             ),
+         return GridItemWidget(
+           item: GridItem(
+             imageUrl: imageUrl.toString(),
+             title: data['title'].toString(),
+             itemName: data['description'].toString(),
+             price: data['price'].toString(),
+             discountedPrice: data['discount'].toString(),
+             category: '',
            ),
          );
                     },

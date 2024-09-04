@@ -79,27 +79,48 @@ class _FirestorePostscreenState extends State<FirestorePostShoesscreen> {
         child: Column(
           children: [
               SizedBox(height: 30),
-            _image != null
-                ? Image.file(
-                    _image!,
-                    height: 150,
-                  )
-                : Text("No image selected"),
-            SizedBox(height: 10),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                ElevatedButton.icon(
-                  onPressed: pickImageFromGallery,
-                  icon: Icon(Icons.photo_library),
-                  label: Text("Gallery"),
-                ),
-                ElevatedButton.icon(
-                  onPressed: pickImageFromCamera,
-                  icon: Icon(Icons.camera_alt),
-                  label: Text("Camera"),
-                ),
-              ],
+            GestureDetector(
+              onTap: () {
+                showModalBottomSheet(
+                  context: context,
+                  builder: (context) {
+                    return Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        ListTile(
+                          leading: Icon(Icons.photo_library),
+                          title: Text('Pick from Gallery'),
+                          onTap: () {
+                            pickImageFromGallery();
+                            Navigator.pop(context);
+                          },
+                        ),
+                        ListTile(
+                          leading: Icon(Icons.camera_alt),
+                          title: Text('Take a Photo'),
+                          onTap: () {
+                            pickImageFromCamera();
+                            Navigator.pop(context);
+                          },
+                        ),
+                      ],
+                    );
+                  },
+                );
+              },
+              child: _image == null
+                  ? Container(
+                      color: Colors.grey[200],
+                      height: 150,
+                      width: double.infinity,
+                      child: Center(child: Text("Select Image", style: TextStyle(color: Colors.grey))),
+                    )
+                  : Image.file(
+                      _image!,
+                      height: 150,
+                      width: double.infinity,
+                      fit: BoxFit.cover,
+                    ),
             ),
             SizedBox(height: 30,),
             TextFormField(
@@ -167,7 +188,7 @@ class _FirestorePostscreenState extends State<FirestorePostShoesscreen> {
         'id': id,
         'imageUrl': imageUrl,
         'price': pricecontroller.text.toString(),
-        'disprice': discontroller.text.toString(),
+        'discount': discontroller.text.toString(),
         'description': discripcontroller.text.toString(),
       });
 

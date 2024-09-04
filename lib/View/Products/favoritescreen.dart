@@ -23,7 +23,7 @@ class FavoritesScreen extends StatelessWidget {
     for (var item in favState.items) {
       message += 'Item Name: ${item.title}\n';
       message += 'Description: ${item.itemName}\n';
-      message += 'Price: ${item.discountedPrice}\n';
+      message += 'Discount: ${item.discountedPrice} %\n';
       message += 'Original Price: ${item.price}\n\n';
     }
 
@@ -67,7 +67,7 @@ class FavoritesScreen extends StatelessWidget {
                       return ListTile(
                         leading: Image.network(item.imageUrl, width: 50, height: 50, fit: BoxFit.cover),
                         title: Text(item.title),
-                        subtitle: Text('${item.discountedPrice} (Original: ${item.price})'),
+                        subtitle: Text('${item.discountedPrice} % (Original: ${item.price})'),
                         trailing: IconButton(
                           icon: Icon(Icons.remove_circle, color: Colors.red),
                           onPressed: () {

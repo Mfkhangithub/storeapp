@@ -109,7 +109,7 @@ class _ProductScreenState extends State<ElectronicsProScreen> {
                                       id: doc.id.toString(),
                                       imageUrl: imageUrl,
                                       price: data['price'],
-                                      discount: data['disprice'],
+                                      discount: data['discount'],
                                       description: data['description'],
                                     ),
                                   ),
@@ -171,7 +171,7 @@ class _ProductScreenState extends State<ElectronicsProScreen> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                  Text('Price: ${data['price']}', style: TextStyle(fontSize: 20),),
-                              Text('Discount Price: ${data['disprice']}', style: TextStyle(fontSize: 20),),
+                              Text('Discount Price: ${data['discount']}', style: TextStyle(fontSize: 20),),
                               Text('Description: ${data['description']}', style: TextStyle(fontSize: 20),),
                               ],
                              )

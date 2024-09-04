@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:store_app/Constant/colorpage.dart';
 import 'package:store_app/View/Admin/AdminProducts/Category/Managecategories.dart';
 import 'package:store_app/View/Admin/AdminProducts/Category/categoriesdashb.dart';
+import 'package:store_app/View/Admin/AdminProducts/Users/allusers.dart';
+import 'package:store_app/View/Dashboard/showshops.dart';
 import 'package:store_app/View/SingInScreens/singin_screen.dart';
 
 
@@ -78,7 +80,7 @@ class _AdminDashboardState extends State<AdminDashboard> {
               icon: Icons.people,
               colors: Colors.black,
               onTap: () {
-                // Navigator.push(context, MaterialPageRoute(builder: (context) => ManageUsersScreen()));
+                Navigator.push(context, MaterialPageRoute(builder: (context) => AdminUserListScreen()));
               },
             ),
             DashboardCard(
@@ -87,6 +89,10 @@ class _AdminDashboardState extends State<AdminDashboard> {
               colors: AppColors.primaryVariant,
               onTap: () {
                 // Implement orders screen
+                Navigator.push(
+  context,
+  MaterialPageRoute(builder: (context) => ShopsListScreen()),
+);
               },
             ),
             DashboardCard(

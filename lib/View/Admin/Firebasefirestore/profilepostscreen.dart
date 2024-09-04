@@ -19,7 +19,7 @@ class _FirestorePostscreenState extends State<FirestoreProfilePostscreen> {
   final postcontroller = TextEditingController();
   final numcontroller = TextEditingController();
   bool loading = false;
-  final fireStore = FirebaseFirestore.instance.collection("userspro");
+  final fireStore = FirebaseFirestore.instance.collection("users");
   File? _image;
   final picker = ImagePicker();
   String? docId;
@@ -30,6 +30,14 @@ class _FirestorePostscreenState extends State<FirestoreProfilePostscreen> {
     _loadProfile();
   }
 
+  @override
+  void dispose() {
+    // Dispose of the controllers when the widget is removed from the widget tree
+    postcontroller.dispose();
+    numcontroller.dispose();
+    super.dispose();
+  }
+
   // Function to load existing profile data
   Future<void> _loadProfile() async {
     QuerySnapshot querySnapshot = await fireStore.get();
@@ -37,12 +45,13 @@ class _FirestorePostscreenState extends State<FirestoreProfilePostscreen> {
       var doc = querySnapshot.docs.first;
       docId = doc.id;
       var data = doc.data() as Map<String, dynamic>;
-      postcontroller.text = data['title'];
-      numcontroller.text = data['number'];
+      postcontroller.text = data['username'];
+      numcontroller.text = data['phone'];
       setState(() {
         // Load image if available
         if (data.containsKey('imageUrl')) {
-          _image = File(data['imageUrl']);
+          // Load the image from the URL and display it
+          _image = null; // Reset _image if you are not caching it locally
         }
       });
     }
@@ -62,7 +71,7 @@ class _FirestorePostscreenState extends State<FirestoreProfilePostscreen> {
 
   // Function to pick image from the camera
   Future pickImageFromCamera() async {
-    final pickedFile = await picker.pickImage(source: ImageSource.camera,imageQuality: 80);
+    final pickedFile = await picker.pickImage(source: ImageSource.camera, imageQuality: 80);
     setState(() {
       if (pickedFile != null) {
         _image = File(pickedFile.path);
@@ -96,6 +105,52 @@ class _FirestorePostscreenState extends State<FirestoreProfilePostscreen> {
         child: Column(
           children: [
             SizedBox(height: 30),
+
+      GestureDetector(
+              onTap: () {
+                showModalBottomSheet(
+                  context: context,
+                  builder: (context) {
+                    return Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        ListTile(
+                          leading: Icon(Icons.photo_library),
+                          title: Text('Pick from Gallery'),
+                          onTap: () {
+                            pickImageFromGallery();
+                            Navigator.pop(context);
+                          },
+                        ),
+                        ListTile(
+                          leading: Icon(Icons.camera_alt),
+                          title: Text('Take a Photo'),
+                          onTap: () {
+                            pickImageFromCamera();
+                            Navigator.pop(context);
+                          },
+                        ),
+                      ],
+                    );
+                  },
+                );
+              },
+              child: _image == null
+                  ? Container(
+                      color: Colors.grey[200],
+                      height: 150,
+                      width: double.infinity,
+                      child: Center(child: Text("Select Image", style: TextStyle(color: Colors.grey))),
+                    )
+                  : Image.file(
+                      _image!,
+                      height: 150,
+                      width: double.infinity,
+                      fit: BoxFit.cover,
+                    ),
+            ),
+            Gutter(),
+
             TextFormField(
               maxLines: 1,
               controller: postcontroller,
@@ -131,8 +186,8 @@ class _FirestorePostscreenState extends State<FirestoreProfilePostscreen> {
                     // Create new profile
                     String id = DateTime.now().microsecondsSinceEpoch.toString();
                     await fireStore.doc(id).set({
-                      'title': postcontroller.text.toString(),
-                      'number': numcontroller.text.toString(),
+                      'username': postcontroller.text.toString(),
+                      'phone': numcontroller.text.toString(),
                       'imageUrl': imageUrl,
                       'id': id,
                     });
@@ -140,11 +195,14 @@ class _FirestorePostscreenState extends State<FirestoreProfilePostscreen> {
                   } else {
                     // Update existing profile
                     await fireStore.doc(docId).update({
-                      'title': postcontroller.text.toString(),
-                      'number': numcontroller.text.toString(),
+                      'username': postcontroller.text.toString(),
+                      'phone': numcontroller.text.toString(),
                       'imageUrl': imageUrl ?? '',
                     });
                   }
+                  postcontroller.clear();
+                  numcontroller.clear();
+                  _image = null; // Clear the selected image
                   Utils().toasMessage("Profile Saved");
                 } catch (error) {
                   Utils().toasMessage(error.toString());

@@ -53,6 +53,7 @@ class _ImageUploadScreenState extends State<ImageUploadScreen> {
                 width: 150,
                 fit: BoxFit.cover,
               ),
+              SizedBox(height: 100,),
             ElevatedButton(
               onPressed: _pickImage,
               child: Text('Pick Image'),

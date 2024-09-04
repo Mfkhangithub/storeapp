@@ -167,7 +167,7 @@ class _FirestorePostscreenState extends State<FirestoreElectronicsPostscreen> {
         'id': id,
         'imageUrl': imageUrl,
         'price': pricecontroller.text.toString(),
-        'disprice': discontroller.text.toString(),
+        'discount': discontroller.text.toString(),
         'description': discripcontroller.text.toString(),
       });
 

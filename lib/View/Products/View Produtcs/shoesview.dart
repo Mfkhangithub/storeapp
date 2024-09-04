@@ -129,15 +129,6 @@ class _ClothesProductViewState extends State<ShoesProductView> {
                 var data = doc.data() as Map<String, dynamic>;
                 String? imageUrl = data.containsKey('imageUrl') ? data['imageUrl'] : null;
 
-                
-      //           ListView.builder(
-      //             scrollDirection: Axis.vertical,
-      //             itemCount: snapshot.data!.docs.length,
-      //             itemBuilder: (context, index) {
-      //  var doc = snapshot.data!.docs[index];
-      //  var data = doc.data() as Map<String, dynamic>;
-      //  String? imageUrl = data.containsKey('imageUrl') ? data['imageUrl'] : null;
-           
        return Container(
          width: 200, // Adjust the width of each item
          margin: EdgeInsets.only(right: 8.0),
@@ -147,7 +138,7 @@ class _ClothesProductViewState extends State<ShoesProductView> {
              title: data['title'].toString(),
              itemName: data['description'].toString(),
              price: data['price'].toString(),
-             discountedPrice: data['disprice'].toString(),
+             discountedPrice: data['discount'].toString(),
              category: '',
            ),
          ),

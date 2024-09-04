@@ -285,7 +285,7 @@ final provider = Provider.of<ProviderController>(context, listen: false);
                 const Gutter(),
                 Center(
                   child: Text(
-                          "Copyright©2023 ",
+                          "Copyright©2024 ",
                           style: TextStyle(fontSize: 12),
                         ),
                 ),
