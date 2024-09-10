@@ -28,7 +28,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.white,
       body: _pages[_selectedIndex],
       bottomNavigationBar: Container(
         margin: EdgeInsets.symmetric(horizontal: 20, vertical: 20),

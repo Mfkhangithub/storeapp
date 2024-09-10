@@ -35,7 +35,7 @@ class UserEditProductScreen extends StatelessWidget {
             itemBuilder: (context, index) {
               final product = products[index];
               return ListTile(
-                title: Text(product['name']),
+                title: Text(product['title']),
                 subtitle: Text('Price: \$${product['price']}'),
                 trailing: Row(
                   mainAxisSize: MainAxisSize.min,

@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gutter/flutter_gutter.dart';
 import 'package:store_app/Constant/colorpage.dart';
+import 'package:store_app/Provider/validation.dart';
 import 'package:store_app/Utils/utils.dart';
 import 'package:store_app/Utils/widget/Customtextfiled.dart';
 import 'package:store_app/Utils/widget/roundbutoon.dart';
@@ -64,7 +65,7 @@ void _login() async {
       }
     }
   } catch (error) {
-    Utils().toasMessage(error.toString());
+    Utils().toasMessage('Please valied email & password');
   } finally {
     setState(() {
       loading = false;
@@ -98,12 +99,7 @@ void _login() async {
                   controller: emailController,
                   hintText: "Email",
                   prefixIcon: CupertinoIcons.mail,
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return 'Please enter email';
-                    }
-                    return null;
-                  },
+                  validator: ValidationUtils.validateEmail,
                 ),
                 Gutter(),
                 ValueListenableBuilder(
@@ -126,12 +122,7 @@ void _login() async {
                           });
                         },
                       ),
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return 'Please enter password';
-                        }
-                        return null;
-                      },
+                      validator: ValidationUtils.validatePassword,
                     );
                   },
                 ),
@@ -144,7 +135,7 @@ void _login() async {
                     },
                     child: Text(
                       'Forgot Password?',
-                      style: TextStyle(fontSize: 14, color: AppColors.black),
+                      style: TextStyle(fontSize: 12, color: AppColors.black),
                     ),
                   ),
                 ),

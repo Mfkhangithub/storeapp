@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gutter/flutter_gutter.dart';
 import 'package:store_app/Constant/colorpage.dart';
@@ -30,6 +31,7 @@ class _SingUpScreenState extends State<SingUpScreen> {
   String _selectedRole = 'User'; // Default role
   int _tapCount = 0; // Counter to track the number of taps
   List<String> _roles = ['User']; // Initially, only 'User' is shown
+  bool _obscureText = true;
 
   @override
   void dispose() {
@@ -41,7 +43,7 @@ class _SingUpScreenState extends State<SingUpScreen> {
   void _onDropdownTap() {
     _tapCount++; // Increment tap count on each tap
 
-    if (_tapCount == 3) {
+    if (_tapCount == 5) {
       setState(() {
         _roles.add('Admin'); // Add 'Admin' after three taps
       });
@@ -148,11 +150,16 @@ class _SingUpScreenState extends State<SingUpScreen> {
                       hintText: "Password",
                       prefixIcon: Icons.lock,
                       validator: ValidationUtils.validatePassword,
-                      obscureText: value,
+                      obscureText: _obscureText,
                       sufficon: IconButton(
-                        icon: Icon(value ? Icons.visibility_off : Icons.visibility),
+                        icon: Icon(
+                          _obscureText ? CupertinoIcons.eye_slash : CupertinoIcons.eye,
+                          color: Colors.black,
+                        ),
                         onPressed: () {
-                          (value as ValueNotifier<bool>).value = !value;
+                          setState(() {
+                            _obscureText = !_obscureText;
+                          });
                         },
                       ),
                     );

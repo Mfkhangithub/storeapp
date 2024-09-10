@@ -263,7 +263,7 @@ final top = coverhight - profileHight / 1;
                        child: CircleAvatar(
                         radius: profileHight / 2.5,
                         // backgroundColor: Colors.black,
-                        backgroundImage: AssetImage("assets/pro.png"),
+                        backgroundImage: AssetImage("assets/pro.jpeg"),
                                            ),
                      ),
  );

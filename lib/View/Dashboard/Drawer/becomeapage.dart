@@ -22,9 +22,9 @@ class _BecomePageState extends State<BecomePage> {
         title: Text("Become a Vendor", style: TextStyle(color: Colors.white)),
         backgroundColor: AppColors.primaryVariant,
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: SingleChildScrollView(
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(16),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,

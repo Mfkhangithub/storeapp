@@ -1,6 +1,8 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:store_app/Constant/colorpage.dart';
+import 'package:store_app/Constant/orderbutton.dart';
 import 'package:store_app/Provider/Addtocard.dart';
 import 'package:store_app/Provider/favoriteprovider.dart';
 import 'package:store_app/View/Products/itemdetailscreen.dart';
@@ -87,6 +89,43 @@ class _GridItemWidgetState extends State<GridItemWidget> {
                       ),
                     ),
                   ),
+                  Positioned(
+              top: 10,
+              right: 10,
+              child: Container(
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: AppColors.primaryVariant,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.3),
+                      blurRadius: 8,
+                      offset: Offset(0, 4),
+                    ),
+                  ],
+                ),
+                child: IconButton(
+                  onPressed: () {
+                    // Handle order button click
+                    Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ItemDetailScreen(item: widget.item),
+                ),
+              );
+                    print('Order button pressed');
+                  },
+                  icon: Icon(Icons.shopping_cart_outlined),
+                  iconSize: 30,
+                  color: Colors.white,
+                  padding: EdgeInsets.all(8.0),
+                  tooltip: 'Order Now',
+                  splashRadius: 25,
+                  splashColor: AppColors.primaryVariant,
+                  highlightColor: Colors.transparent,
+                ),
+              ),
+            ),
                   // Animated container with options
                   Positioned(
                     bottom: _showOptions ? 0 : -80,
@@ -95,7 +134,7 @@ class _GridItemWidgetState extends State<GridItemWidget> {
                     child: AnimatedContainer(
                       duration: Duration(milliseconds: 300),
                       height: _showOptions ? 80 : 0,
-                      color: Colors.black.withOpacity(0.6),
+                      color: Colors.black.withOpacity(0.3),
                       child: _showOptions ? _buildOptions() : SizedBox.shrink(),
                     ),
                   ),

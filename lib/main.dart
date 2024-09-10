@@ -4,6 +4,7 @@ import 'package:store_app/Provider/Addtocard.dart';
 import 'package:store_app/Provider/Alllinks.dart';
 import 'package:store_app/Provider/favoriteprovider.dart';
 import 'package:store_app/Provider/loginprovider.dart';
+import 'package:store_app/Provider/themeprovider.dart';
 import 'package:store_app/SplashScreen/Splachscreen.dart';
 import 'package:provider/provider.dart';
 
@@ -25,16 +26,19 @@ class MyApp extends StatelessWidget {
               ChangeNotifierProvider(create: (context) => ProviderController()),
               ChangeNotifierProvider(create: (context) => CartState()),
               ChangeNotifierProvider(create: (_) => FavoritesProvider()),
+              ChangeNotifierProvider(create: (_) => ThemeProvider()),
             ],
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Flutter Demo',
-        theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-          useMaterial3: true,
-        ),
-        home: SplashScreen(),
-      ),
-    );
+      child: Consumer<ThemeProvider>(
+      builder: (context, themeProvider, child) {
+        return MaterialApp(
+          debugShowCheckedModeBanner: false,
+          title: 'Admin Settings',
+          theme: ThemeData.light(), // Define your light theme
+          darkTheme: ThemeData.dark(), // Define your dark theme
+          themeMode: themeProvider.themeMode, // Use themeMode from provider
+          home: SplashScreen(),
+        );
+      },
+    ));
   }
 }

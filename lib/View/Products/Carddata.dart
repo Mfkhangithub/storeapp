@@ -17,17 +17,19 @@ class CartPage extends StatelessWidget {
       return;
     }
 
+    // Construct the WhatsApp message with all items
     String message = 'Hello, I would like to order the following items:\n\n';
 
     for (var item in cartState.items) {
       message += 'Item Name: ${item.title}\n';
       message += 'Description: ${item.itemName}\n';
-      message += 'Discount: ${item.discountedPrice} %\n';
+      message += 'Discount: ${item.discountedPrice}%\n';
       message += 'Original Price: ${item.price}\n\n';
     }
 
     final String whatsappUrl = 'https://wa.me/$whatsappNumber?text=${Uri.encodeComponent(message)}';
 
+    // Check if WhatsApp is available and launch the URL
     if (await canLaunch(whatsappUrl)) {
       await launch(whatsappUrl);
     } else {
@@ -47,6 +49,7 @@ class CartPage extends StatelessWidget {
       ),
       body: Consumer<CartState>(
         builder: (context, cartState, child) {
+          // Check if cart is empty
           if (cartState.items.isEmpty) {
             return Center(
               child: Text(
@@ -55,6 +58,7 @@ class CartPage extends StatelessWidget {
               ),
             );
           } else {
+            // Display cart items and order button
             return Column(
               children: [
                 Expanded(
@@ -65,7 +69,7 @@ class CartPage extends StatelessWidget {
                       return ListTile(
                         leading: Image.network(item.imageUrl, width: 50, height: 50, fit: BoxFit.cover),
                         title: Text(item.title),
-                        subtitle: Text('${item.discountedPrice} % (Original: ${item.price})'),
+                        subtitle: Text('${item.discountedPrice}% (Original: ${item.price})'),
                         trailing: IconButton(
                           icon: Icon(Icons.remove_circle, color: Colors.red),
                           onPressed: () {

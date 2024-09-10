@@ -22,9 +22,9 @@ class _AboutUsPageState extends State<AboutUsPage> {
         title: Text("About Us", style: TextStyle(color: Colors.white)),
         backgroundColor: AppColors.primaryVariant,
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: SingleChildScrollView(
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(16),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,

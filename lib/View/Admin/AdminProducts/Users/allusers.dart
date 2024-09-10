@@ -56,14 +56,6 @@ class _AdminUserListScreenState extends State<AdminUserListScreen> {
                       Text(user['role']),
                       Gutter(),
                       GestureDetector(
-                        onTap: (){
-                          Navigator.push(
-    context,
-    MaterialPageRoute(
-      builder: (context) => ShopDetailsScreen(shopId: user.id),
-    ),
-  );
-                        },
                         child: Icon(Icons.shop))
                     ],),
                     onTap: () {

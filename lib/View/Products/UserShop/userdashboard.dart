@@ -1,6 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:store_app/Constant/colorpage.dart';
+import 'package:store_app/View/Products/UserShop/Customer%20Record/customerlistview.dart';
+import 'package:store_app/View/Products/UserShop/Customer%20Record/customerrecord.dart';
 import 'package:store_app/View/Products/UserShop/usereditproduct.dart';
 import 'package:store_app/View/Products/UserShop/usershopproductcreation.dart';
 import 'package:store_app/View/SingInScreens/singin_screen.dart'; // Login Page
@@ -81,6 +83,27 @@ class _UserDashboardState extends State<UserDashboard> {
                 Navigator.push(context, MaterialPageRoute(builder: (context) => UserEditProductScreen(shopId: widget.shopId,)));
               },
             ),
+            DashboardCard(
+              title: 'Customer Record',
+              icon: Icons.account_box,
+              colors: Color.fromARGB(255, 5, 2, 160),
+              onTap: () {
+                 Navigator.push(context, MaterialPageRoute(builder: (context) => CustomerRecordPage(shopId: widget.shopId,)));
+              },
+            ),
+            DashboardCard(
+  title: 'View Customer Records',
+  icon: Icons.list,
+  colors: Color.fromARGB(255, 0, 128, 255),
+  onTap: () {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => CustomerRecordListPage(shopId: widget.shopId),
+      ),
+    );
+  },
+),
           ],
         ),
       ),

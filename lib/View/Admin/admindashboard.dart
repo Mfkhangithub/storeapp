@@ -1,11 +1,10 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:store_app/Constant/colorpage.dart';
 import 'package:store_app/View/Admin/AdminProducts/Category/Managecategories.dart';
 import 'package:store_app/View/Admin/AdminProducts/Category/categoriesdashb.dart';
 import 'package:store_app/View/Admin/AdminProducts/Users/allusers.dart';
-import 'package:store_app/View/Dashboard/showshops.dart';
-import 'package:store_app/View/SingInScreens/singin_screen.dart';
+import 'package:store_app/View/Admin/AdminProducts/Users/showshops.dart';
+import 'package:store_app/View/Admin/Adminsetting/adminsetting.dart';
 
 
 class AdminDashboard extends StatefulWidget {
@@ -16,41 +15,20 @@ class AdminDashboard extends StatefulWidget {
 }
 
 class _AdminDashboardState extends State<AdminDashboard> {
-    bool isLoading = false;
 
 
-  void _logout() async {
-    setState(() {
-      isLoading = true;
-    });
-    try {
-      await FirebaseAuth.instance.signOut();
-      // Navigate to the login screen
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => LoginPage()),
-      );
-    } catch (e) {
-      print('Error logging out: $e');
-      // Handle logout errors if necessary
-    } finally {
-      setState(() {
-        isLoading = false;
-      });
-    }
-  }
+
+ 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.white,
       appBar: AppBar(
         automaticallyImplyLeading: false,
+        iconTheme: IconThemeData(color: Colors.white),
         backgroundColor: AppColors.primaryVariant,
         title: Text('Admin Dashboard', style: TextStyle(color: AppColors.white)),
         centerTitle: true,
-         actions: [IconButton(onPressed: (){
-          _logout();
-        }, icon: Icon(Icons.logout, color: Colors.white,))],
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -84,11 +62,10 @@ class _AdminDashboardState extends State<AdminDashboard> {
               },
             ),
             DashboardCard(
-              title: 'Orders',
-              icon: Icons.shopping_cart,
+              title: 'Shops',
+              icon: Icons.shop,
               colors: AppColors.primaryVariant,
               onTap: () {
-                // Implement orders screen
                 Navigator.push(
   context,
   MaterialPageRoute(builder: (context) => ShopsListScreen()),
@@ -109,6 +86,7 @@ class _AdminDashboardState extends State<AdminDashboard> {
               colors: Colors.black,
               onTap: () {
                 // Implement settings screen
+                Navigator.push(context, MaterialPageRoute(builder: (context)=> AdminSettingsScreen()));
               },
             ),
           ],

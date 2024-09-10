@@ -2,9 +2,7 @@ import 'dart:ui';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_gutter/flutter_gutter.dart';
 import 'package:provider/provider.dart';
 import 'package:store_app/Constant/categoriesclass.dart';
@@ -23,6 +21,7 @@ import 'package:store_app/View/Products/UserShop/usershowproduct.dart';
 import 'package:store_app/View/Products/View%20Produtcs/clothesview.dart';
 import 'package:store_app/View/Products/View%20Produtcs/shoesview.dart';
 import 'package:store_app/View/Products/favoritescreen.dart';
+import 'package:store_app/View/Videoscreen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -36,8 +35,9 @@ class _HomeScreenState extends State<HomeScreen> {
   final FirebaseServiceClothes firebaseService = FirebaseServiceClothes(); // Create an instance of FirebaseService
   final fireStore = FirebaseFirestore.instance.collection("clothesdata").snapshots();
   final fireStoreShoes = FirebaseFirestore.instance.collection("shoesdata").snapshots();
-    final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-    final FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  bool isLoading = false;
 
 
   @override
@@ -120,7 +120,9 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
       ),
       drawer: MyDrawer(),
-body: SingleChildScrollView(
+body: isLoading
+          ? Center(child: CircularProgressIndicator())
+          : SingleChildScrollView(
   child: Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
@@ -317,7 +319,7 @@ body: SingleChildScrollView(
                       title: data['title'].toString(),
                       itemName: data['description'].toString(),
                       price: data['price'].toString(),
-                      discountedPrice: data['disprice'].toString(),
+                      discountedPrice: data['discount'].toString(),
                       category: '',
                     ),
                   ),
@@ -385,6 +387,9 @@ body: SingleChildScrollView(
       Gutter(),
       Divider(thickness: 6,),
       Gutter(),
+      ElevatedButton(onPressed: (){
+        Navigator.push(context, MaterialPageRoute(builder: (context)=> VideoPickerScreen()));
+      }, child: Text('Watch Video')),
       Gutter(),
       FooterWidget(provider: provider),
     ],
